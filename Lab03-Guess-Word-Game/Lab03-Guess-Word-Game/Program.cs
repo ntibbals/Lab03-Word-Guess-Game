@@ -1,9 +1,12 @@
 ﻿using System;
+using System.IO;
 
 namespace Lab03_Guess_Word_Game
 {
     public class Program
     {
+        public static string Path = "../../../../../GameWords.txt";
+
         static void Main(string[] args)
         {
             bool displayMenu = true;
@@ -62,7 +65,17 @@ namespace Lab03_Guess_Word_Game
         static void StartGame()
         {
             Console.WriteLine("Game Running.");
+            ReadFile(Path);
             Console.ReadLine();
+        }
+
+        static void ReadFile(string Path)
+        {
+            string[] lines = File.ReadAllLines(Path);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                Console.WriteLine(lines[i]);
+            }
         }
     }
 }
