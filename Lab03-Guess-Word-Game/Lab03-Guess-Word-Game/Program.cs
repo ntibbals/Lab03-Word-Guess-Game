@@ -65,16 +65,26 @@ namespace Lab03_Guess_Word_Game
         static void StartGame()
         {
             Console.WriteLine("Game Running.");
-            ReadFile(Path);
+            ReadFileWords(Path);
+            UpdateFileWords(Path);
+            ReadFileWords(Path);
             Console.ReadLine();
         }
 
-        static void ReadFile(string Path)
+        static void ReadFileWords(string Path)
         {
-            string[] lines = File.ReadAllLines(Path);
-            for (int i = 0; i < lines.Length; i++)
+            string[] words = File.ReadAllLines(Path);
+            for (int i = 0; i < words.Length; i++)
             {
-                Console.WriteLine(lines[i]);
+                Console.WriteLine(words[i]);
+            }
+        }
+
+        static void UpdateFileWords(string Path)
+        {
+            using (StreamWriter streamWriter = File.AppendText(Path))
+            {
+                streamWriter.WriteLine("New");
             }
         }
     }
