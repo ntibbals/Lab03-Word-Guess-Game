@@ -5,14 +5,16 @@ namespace Lab03_Guess_Word_Game
 {
     public class Program
     {
-        public static string Path = "../../../../../GameWords.txt";
-
+        public static string Answers = "../../../../../GameWords.txt";
+        public static string Guesses = "../../../../../GuessWords.txt";
         static void Main(string[] args)
         {
             bool displayMenu = true;
             while(displayMenu)
             {
-                CreateFile(Path);
+                CreateFile(Answers);
+                CreateFile(Guesses);
+
                 MainMenu();
 
                    
@@ -37,7 +39,8 @@ namespace Lab03_Guess_Word_Game
                         break;
 
                     case "3":
-                        DeleteFile(Path);
+                        DeleteFile(Answers);
+                        DeleteFile(Guesses);
                         Environment.Exit(0);
                         break;
 
@@ -64,9 +67,10 @@ namespace Lab03_Guess_Word_Game
         static void StartGame()
         {
             Console.WriteLine("Game Running.");
-            string guess = GetGuess();
-            UpdateFileWords(Path, guess);
-            ReadFileWords(Path);
+            RandomHouse();
+            //string guess = GetGuess();
+            //UpdateFileWords(Guesses, guess);
+            //ReadFileWords(Answers);
             Console.ReadLine();
             MainMenu();
         }
@@ -77,12 +81,28 @@ namespace Lab03_Guess_Word_Game
             string guess = Console.ReadLine();
             return guess;
         }
+        public static string RandomHouse()
+        {
+            Random rand = new Random();
+            string[] houseArray = { "Lannister", "Baratheon", "Greyjoy", "Stark", "Tyrell", "Bolton", "Targaryen" };
+            int chosenHouse = rand.Next(houseArray.Length);
+            Console.WriteLine(houseArray[chosenHouse]);
+            return houseArray[chosenHouse];
+
+        }
         static void CreateFile(string Path)
         {
-            using (StreamWriter streamWriter = new StreamWriter(Path))
+            using (StreamWriter streamWriterG = new StreamWriter(Answers))
             {
-                streamWriter.WriteLine("Test1");
-                
+                string[] houseArray = { "Lannister", "Baratheon", "Greyjoy", "Stark", "Tyrell", "Bolton", "Targaryen" };
+                for (int i = 0; i < houseArray.Length; i++)
+                {
+                    streamWriterG.Write($" {houseArray[i]}");
+                }              
+            }
+            using (StreamWriter streamWriterA = new StreamWriter(Guesses))
+            {
+
             }
         }
         static void ReadFileWords(string Path)
