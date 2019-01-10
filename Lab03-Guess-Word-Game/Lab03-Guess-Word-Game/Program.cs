@@ -12,7 +12,10 @@ namespace Lab03_Guess_Word_Game
             bool displayMenu = true;
             while(displayMenu)
             {
-                    MainMenu();
+                CreateFile(Path);
+                MainMenu();
+
+                   
             }
         }
 
@@ -29,7 +32,7 @@ namespace Lab03_Guess_Word_Game
                 string input = Console.ReadLine();
                 switch (input)
                 {
-                    case "1":
+                    case "1":      
                         StartGame();
                         break;
 
@@ -61,36 +64,43 @@ namespace Lab03_Guess_Word_Game
         static void StartGame()
         {
             Console.WriteLine("Game Running.");
-            CreateFile(Path);
-            ReadFileWords(Path);
-            UpdateFileWords(Path);
+            string guess = GetGuess();
+            UpdateFileWords(Path, guess);
             ReadFileWords(Path);
             Console.ReadLine();
             MainMenu();
         }
 
+        static string GetGuess()
+        {
+            Console.WriteLine("Guess");
+            string guess = Console.ReadLine();
+            return guess;
+        }
         static void CreateFile(string Path)
         {
             using (StreamWriter streamWriter = new StreamWriter(Path))
             {
-                streamWriter.WriteLine("Test1, Test2");
+                streamWriter.WriteLine("Test1");
                 
             }
         }
         static void ReadFileWords(string Path)
         {
             string[] words = File.ReadAllLines(Path);
+            //string key = guess;
+            
             for (int i = 0; i < words.Length; i++)
             {
-                Console.WriteLine(words[i]);
+                    Console.WriteLine(words[i]);
             }
         }
 
-        static void UpdateFileWords(string Path)
+        static void UpdateFileWords(string Path, string guess)
         {
             using (StreamWriter streamWriter = File.AppendText(Path))
             {
-                streamWriter.Write("New");
+                streamWriter.WriteLine($"{guess}");
             }
         }
 
