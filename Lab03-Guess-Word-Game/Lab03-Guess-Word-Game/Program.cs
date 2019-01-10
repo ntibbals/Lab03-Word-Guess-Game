@@ -71,6 +71,7 @@ namespace Lab03_Guess_Word_Game
             //string guess = GetGuess();
             //UpdateFileWords(Guesses, guess);
             //ReadFileWords(Answers);
+            RandomHouse();
             Console.ReadLine();
             MainMenu();
         }
@@ -84,7 +85,7 @@ namespace Lab03_Guess_Word_Game
         public static string RandomHouse()
         {
             Random rand = new Random();
-            string[] houseArray = { "Lannister", "Baratheon", "Greyjoy", "Stark", "Tyrell", "Bolton", "Targaryen" };
+            string[] houseArray = ReadFileWords(Answers);
             int chosenHouse = rand.Next(houseArray.Length);
             Console.WriteLine(houseArray[chosenHouse]);
             return houseArray[chosenHouse];
@@ -105,15 +106,16 @@ namespace Lab03_Guess_Word_Game
 
             }
         }
-        static void ReadFileWords(string Path)
+        static string[] ReadFileWords(string Path)
         {
             string[] words = File.ReadAllLines(Path);
-            //string key = guess;
-            
+            string[] answerKeyList = new string[words.Length];
+
             for (int i = 0; i < words.Length; i++)
             {
-                    Console.WriteLine(words[i]);
+                answerKeyList[i] = words[i];
             }
+            return answerKeyList;
         }
 
         static void UpdateFileWords(string Path, string guess)
