@@ -12,16 +12,7 @@ namespace Lab03_Guess_Word_Game
             bool displayMenu = true;
             while(displayMenu)
             {
-                Console.WriteLine("Do you want to play a game? y/n");
-                string start = Console.ReadLine();
-                if (start == "y")
-                {
                     MainMenu();
-                }
-                else if (start == "n")
-                {
-                    Environment.Exit(0);
-                }
             }
         }
 
@@ -40,6 +31,11 @@ namespace Lab03_Guess_Word_Game
                 {
                     case "1":
                         StartGame();
+                        break;
+
+                    case "3":
+                        DeleteFile(Path);
+                        Environment.Exit(0);
                         break;
 
                 }
@@ -65,12 +61,22 @@ namespace Lab03_Guess_Word_Game
         static void StartGame()
         {
             Console.WriteLine("Game Running.");
+            CreateFile(Path);
             ReadFileWords(Path);
             UpdateFileWords(Path);
             ReadFileWords(Path);
             Console.ReadLine();
+            MainMenu();
         }
 
+        static void CreateFile(string Path)
+        {
+            using (StreamWriter streamWriter = new StreamWriter(Path))
+            {
+                streamWriter.WriteLine("Test1, Test2");
+                
+            }
+        }
         static void ReadFileWords(string Path)
         {
             string[] words = File.ReadAllLines(Path);
@@ -84,8 +90,13 @@ namespace Lab03_Guess_Word_Game
         {
             using (StreamWriter streamWriter = File.AppendText(Path))
             {
-                streamWriter.WriteLine("New");
+                streamWriter.Write("New");
             }
+        }
+
+        static void DeleteFile(string Path)
+        {
+            File.Delete(Path);
         }
     }
 }
