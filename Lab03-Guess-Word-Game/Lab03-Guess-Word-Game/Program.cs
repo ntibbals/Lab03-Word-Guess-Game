@@ -118,6 +118,7 @@ namespace Lab03_Guess_Word_Game
             }
             while (play)
             {
+
                 for (int i = 0; i < key.Length; i++)
                 {
                     Console.Write($"{defaultArray[i]} ");
