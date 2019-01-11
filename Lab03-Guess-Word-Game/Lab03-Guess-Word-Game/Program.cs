@@ -70,7 +70,8 @@ namespace Lab03_Guess_Word_Game
             //string guess = GetGuess();
             //UpdateFileWords(Guesses, guess);
             //ReadFileWords(Answers);
-            RandomHouse();
+            string key = RandomHouse();
+            RunGame(key);
             Console.ReadLine();
             MainMenu();
         }
@@ -88,6 +89,33 @@ namespace Lab03_Guess_Word_Game
             int chosenHouse = rand.Next(houseArray.Length);
             Console.WriteLine(houseArray[chosenHouse]);
             return houseArray[chosenHouse];
+
+        }
+
+        public static string GuessLogic(string guess, string key)
+        {
+            string wrong = "_";
+            for (int i = 0; i < key.Length; i++)
+            {
+                if (key.Contains(guess))
+                {
+                    return guess;
+                }
+                else
+                    Console.WriteLine("Try again");
+            }
+            return wrong;
+        }
+        public static void RunGame(string key)
+        {
+        
+            bool game = true;
+            while (game)
+            {
+                string guess = GetGuess();
+                GuessLogic(guess, key);
+
+            }
 
         }
         static void CreateFile(string Path)
