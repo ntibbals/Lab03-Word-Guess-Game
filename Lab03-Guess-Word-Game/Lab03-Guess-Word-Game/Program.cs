@@ -70,7 +70,7 @@ namespace Lab03_Guess_Word_Game
             //string guess = GetGuess();
             //UpdateFileWords(Guesses, guess);
             //ReadFileWords(Answers);
-            string key = RandomHouse();
+            string key = RandomHouse().ToLower();
             RunGame(key);
             Console.ReadLine();
             MainMenu();
@@ -78,6 +78,7 @@ namespace Lab03_Guess_Word_Game
 
         static string GetGuess()
         {
+            Console.WriteLine();
             Console.WriteLine("Guess");
             string guess = Console.ReadLine();
             return guess;
@@ -87,42 +88,46 @@ namespace Lab03_Guess_Word_Game
             Random rand = new Random();
             string[] houseArray = ReadFileWords(Answers);
             int chosenHouse = rand.Next(houseArray.Length);
-            Console.WriteLine(houseArray[chosenHouse]);
             return houseArray[chosenHouse];
 
         }
 
-        public static string GuessLogic(string key)
+        //public static string[] GameDefault(string key)
+        //{
+        //    string wrong = "_";
+        //    string[] defaultArray = new string[key.Length];
+        //    for (int i = 0; i < key.Length; i++)
+        //    {
+        //        keyArray[i] = wrong;
+        //        Console.Write($"{keyArray[i]} ");
+        //    }
+        //    return keyArray;
+            
+        //}
+        public static void RunGame(string key)
         {
-            string guess = GetGuess();
             string wrong = "_";
-            string[] keyArray = new string [key.Length];
-            for (int i = 0; i < key.Length; i++)
+            string[] defaultArray = new string[key.Length];
+            bool play = true;
+            while (play)
             {
-                keyArray[i] = "_";
-                Console.Write($"{key[i]}");
-            }
+                for (int i = 0; i < key.Length; i++)
+                {
+                    defaultArray[i] = wrong;
+                    Console.Write($"{defaultArray[i]} ");
+                }
+                string[] keyArray = new string[key.Length];
+            string guess = GetGuess().ToLower();
             for (int i = 0; i < keyArray.Length; i++)
             {
                 if (key.Contains(guess))
                 {
-                    return keyArray[i];
+                    defaultArray[i] = guess;
                 }
                 else
                     Console.WriteLine("Try again");
             }
-            return wrong;
-        }
-        public static void RunGame(string key)
-        {
-        
-            bool game = true;
-            while (game)
-            {
-                GuessLogic(key);
-
             }
-
         }
         static void CreateFile(string Path)
         {
