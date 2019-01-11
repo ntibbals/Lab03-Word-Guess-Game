@@ -92,14 +92,21 @@ namespace Lab03_Guess_Word_Game
 
         }
 
-        public static string GuessLogic(string guess, string key)
+        public static string GuessLogic(string key)
         {
+            string guess = GetGuess();
             string wrong = "_";
+            string[] keyArray = new string [key.Length];
             for (int i = 0; i < key.Length; i++)
+            {
+                keyArray[i] = "_";
+                Console.Write($"{key[i]}");
+            }
+            for (int i = 0; i < keyArray.Length; i++)
             {
                 if (key.Contains(guess))
                 {
-                    return guess;
+                    return keyArray[i];
                 }
                 else
                     Console.WriteLine("Try again");
@@ -112,8 +119,7 @@ namespace Lab03_Guess_Word_Game
             bool game = true;
             while (game)
             {
-                string guess = GetGuess();
-                GuessLogic(guess, key);
+                GuessLogic(key);
 
             }
 
