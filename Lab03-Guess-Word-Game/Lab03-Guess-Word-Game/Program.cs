@@ -67,7 +67,6 @@ namespace Lab03_Guess_Word_Game
         static void StartGame()
         {
             Console.WriteLine("Game Running.");
-            RandomHouse();
             //string guess = GetGuess();
             //UpdateFileWords(Guesses, guess);
             //ReadFileWords(Answers);
@@ -98,7 +97,7 @@ namespace Lab03_Guess_Word_Game
                 string[] houseArray = { "Lannister", "Baratheon", "Greyjoy", "Stark", "Tyrell", "Bolton", "Targaryen" };
                 for (int i = 0; i < houseArray.Length; i++)
                 {
-                    streamWriterG.Write($" {houseArray[i]}");
+                    streamWriterG.WriteLine($"{houseArray[i]}");
                 }              
             }
             using (StreamWriter streamWriterA = new StreamWriter(Guesses))

@@ -1,1 +1,7 @@
- Lannister Baratheon Greyjoy Stark Tyrell Bolton Targaryen
+Lannister
+Baratheon
+Greyjoy
+Stark
+Tyrell
+Bolton
+Targaryen
