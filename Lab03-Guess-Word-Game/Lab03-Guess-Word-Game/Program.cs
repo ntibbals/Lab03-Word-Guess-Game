@@ -107,12 +107,14 @@ namespace Lab03_Guess_Word_Game
         public static void RunGame(string key)
         {
             string wrong = "_";
-            string[] defaultArray = new string[key.Length];
+            
+            char[] charKeyArray;
+            charKeyArray = key.ToCharArray();
+            string[] defaultArray = new string[charKeyArray.Length];
             bool play = true;
             for (int i = 0; i < key.Length; i++)
             {
                 defaultArray[i] = wrong;
-                Console.Write($"{defaultArray[i]} ");
             }
             while (play)
             {
@@ -120,14 +122,13 @@ namespace Lab03_Guess_Word_Game
                 {
                     Console.Write($"{defaultArray[i]} ");
                 }
-                string[] keyArray = new string[key.Length];
+                //string[] keyArray = new string[key.Length];
                 string guess = GetGuess().ToLower();
-                for (int i = 0; i < keyArray.Length; i++)
+                for (int i = 0; i < charKeyArray.Length; i++)
                 {
-                if (key.Contains(guess))
+                if (key[i].ToString() == guess)
                 {
-                    defaultArray[i] = key[i].ToString();
-                    //Console.Write($"{guess}");
+                    defaultArray[i] = charKeyArray[i].ToString();
                 }
 
                 }
