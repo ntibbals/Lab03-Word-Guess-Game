@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace Lab03_Guess_Word_Game
 {
@@ -111,12 +112,13 @@ namespace Lab03_Guess_Word_Game
             char[] charKeyArray;
             charKeyArray = key.ToCharArray();
             string[] defaultArray = new string[charKeyArray.Length];
+            //string container = defaultArray.ToString();
             bool play = true;
             for (int i = 0; i < key.Length; i++)
             {
                 defaultArray[i] = wrong;
             }
-            while (play)
+            while (defaultArray.Contains(wrong))
             {
 
                 for (int i = 0; i < key.Length; i++)
