@@ -109,26 +109,31 @@ namespace Lab03_Guess_Word_Game
             string wrong = "_";
             string[] defaultArray = new string[key.Length];
             bool play = true;
+            for (int i = 0; i < key.Length; i++)
+            {
+                defaultArray[i] = wrong;
+                Console.Write($"{defaultArray[i]} ");
+            }
             while (play)
             {
                 for (int i = 0; i < key.Length; i++)
                 {
-                    defaultArray[i] = wrong;
                     Console.Write($"{defaultArray[i]} ");
                 }
                 string[] keyArray = new string[key.Length];
-            string guess = GetGuess().ToLower();
-            for (int i = 0; i < keyArray.Length; i++)
-            {
+                string guess = GetGuess().ToLower();
+                for (int i = 0; i < keyArray.Length; i++)
+                {
                 if (key.Contains(guess))
                 {
-                    defaultArray[i] = guess;
+                    defaultArray[i] = key[i].ToString();
+                    //Console.Write($"{guess}");
                 }
-                else
-                    Console.WriteLine("Try again");
-            }
+
+                }
             }
         }
+
         static void CreateFile(string Path)
         {
             using (StreamWriter streamWriterG = new StreamWriter(Answers))
