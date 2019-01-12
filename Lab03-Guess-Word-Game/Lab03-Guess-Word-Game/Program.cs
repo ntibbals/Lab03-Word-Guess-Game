@@ -10,9 +10,10 @@ namespace Lab03_Guess_Word_Game
         static void Main(string[] args)
         {
             bool displayMenu = true;
-            while(displayMenu)
+            CreateFile(Answers);
+            while (displayMenu)
             {
-                CreateFile(Answers);
+
 
                 MainMenu();
 
@@ -78,7 +79,10 @@ namespace Lab03_Guess_Word_Game
                 switch (input)
                 {
                     case "1":
+                        DisplayFileHouses(Answers);
                         AddHouse(AskForNewHouse());
+                        DisplayFileHouses(Answers);
+                        Console.ReadLine();
                         break;
 
                     case "2":
@@ -224,7 +228,8 @@ namespace Lab03_Guess_Word_Game
         {
             string[] words = File.ReadAllLines(Answers);
             string[] answerKeyList = new string[words.Length];
-
+            Console.WriteLine("Current list of houses:");
+            Console.WriteLine();
             for (int i = 0; i < words.Length; i++)
             {
                 answerKeyList[i] = words[i];

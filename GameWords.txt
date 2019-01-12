@@ -5,3 +5,5 @@ Stark
 Tyrell
 Bolton
 Targaryen
+Bear
+Tibbals
