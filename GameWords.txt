@@ -3,7 +3,4 @@ Baratheon
 Greyjoy
 Stark
 Tyrell
-Bolton
-Targaryen
-Bear
-Tibbals
+

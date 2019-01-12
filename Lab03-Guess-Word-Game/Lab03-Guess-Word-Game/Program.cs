@@ -86,7 +86,10 @@ namespace Lab03_Guess_Word_Game
                         break;
 
                     case "2":
-                        Admin();
+                        DisplayFileHouses(Answers);
+                        CreateUpdatedFile(DeleteHouse(AskForDeletion(), Answers), Answers);
+                        DisplayFileHouses(Answers);
+                        Console.ReadLine();
                         break;
 
                     case "3":
@@ -255,9 +258,47 @@ namespace Lab03_Guess_Word_Game
             }
         }
 
+        static string AskForDeletion ()
+        {
+            Console.WriteLine("What house would you like to remove?");
+            string input = Console.ReadLine();
+            return input;
+        }
+
+        static string[] DeleteHouse(string input, string Path)
+        {
+            string[] words = File.ReadAllLines(Answers);
+            string[] answerKeyList = new string[words.Length];
+            string[] newKeyList = new string[answerKeyList.Length - 1];
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                answerKeyList[i] = words[i];
+            }
+            for (int i = 0; i < newKeyList.Length; i++)
+            {
+                if (input != answerKeyList[i])
+                {
+                    newKeyList[i] = answerKeyList[i];
+                }
+            }
+            return newKeyList;
+        }
+
+        static void CreateUpdatedFile(string[] newList, string Path)
+        {
+            DeleteFile(Answers);
+            using (StreamWriter streamWriterG = new StreamWriter(Answers))
+            {
+                for (int i = 0; i < newList.Length; i++)
+                {
+                    streamWriterG.WriteLine($"{newList[i]}");
+                }
+            }
+        }
         static void DeleteFile(string Path)
         {
-            File.Delete(Path);
+            File.Delete(Answers);
         }
     }
 }
