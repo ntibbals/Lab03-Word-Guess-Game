@@ -67,7 +67,7 @@ namespace Lab03_Guess_Word_Game
 
         static void StartGame()
         {
-            Console.WriteLine("Game Running.");
+            Console.WriteLine("What is your house?");
             //string guess = GetGuess();
             //UpdateFileWords(Guesses, guess);
             //ReadFileWords(Answers);
@@ -113,7 +113,8 @@ namespace Lab03_Guess_Word_Game
             charKeyArray = key.ToCharArray();
             string[] defaultArray = new string[charKeyArray.Length];
             //string container = defaultArray.ToString();
-            bool play = true;
+            string[] guessArray = new string[25];
+            int counter = 0;
             for (int i = 0; i < key.Length; i++)
             {
                 defaultArray[i] = wrong;
@@ -121,21 +122,29 @@ namespace Lab03_Guess_Word_Game
             while (defaultArray.Contains(wrong))
             {
 
-                for (int i = 0; i < key.Length; i++)
+                Console.Write($"{String.Join(" ", defaultArray)}");
+                Console.WriteLine();
+                if (counter > 0)
                 {
-                    Console.Write($"{defaultArray[i]} ");
+                    Console.WriteLine($"Previous guesses: {String.Join(" ", guessArray)}");
                 }
                 //string[] keyArray = new string[key.Length];
                 string guess = GetGuess().ToLower();
                 for (int i = 0; i < charKeyArray.Length; i++)
                 {
-                if (key[i].ToString() == guess)
+                    
+                    if (key[i].ToString() == guess)
                 {
                     defaultArray[i] = charKeyArray[i].ToString();
                 }
 
                 }
+                counter++;
+                guessArray[counter] = guess;
             }
+            Console.WriteLine($"{key}");
+            Console.WriteLine($"Hooray! Your are in house {key}");
+            Console.ReadLine();
         }
 
         static void CreateFile(string Path)
