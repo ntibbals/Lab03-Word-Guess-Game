@@ -7,14 +7,12 @@ namespace Lab03_Guess_Word_Game
     public class Program
     {
         public static string Answers = "../../../../../GameWords.txt";
-        public static string Guesses = "../../../../../GuessWords.txt";
         static void Main(string[] args)
         {
             bool displayMenu = true;
             while(displayMenu)
             {
                 CreateFile(Answers);
-                CreateFile(Guesses);
 
                 MainMenu();
 
@@ -38,11 +36,62 @@ namespace Lab03_Guess_Word_Game
                     case "1":      
                         StartGame();
                         break;
+                    case "2":
+                        Admin();
+                        break;
 
                     case "3":
                         DeleteFile(Answers);
-                        DeleteFile(Guesses);
                         Environment.Exit(0);
+                        break;
+
+                }
+            }
+            catch (ArgumentNullException e) //catch null exception
+            {
+                Console.WriteLine($"You did not enter anything. Please try again.");
+                Console.ReadLine();
+            }
+            catch (FormatException e) // catch format exception
+            {
+                Console.WriteLine($"Unable to read format. Please try agian.");
+                Console.ReadLine();
+            }
+            catch (Exception e) // catch all exception(general)
+            {
+                Console.WriteLine($"You've hit the following exception: {e.Message}.");
+                Console.ReadLine();
+            }
+
+        }
+        public static void Admin()
+        {
+            Console.Clear();
+            try
+            {
+                Console.Clear();
+                Console.WriteLine("1) Add a house");
+                Console.WriteLine("2) Delete a house");
+                Console.WriteLine("3) View all houses");
+                Console.WriteLine("4) Go back to main menu");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        AddHouse(AskForNewHouse());
+                        break;
+
+                    case "2":
+                        Admin();
+                        break;
+
+                    case "3":
+                        DisplayFileHouses(Answers);
+                        Console.ReadLine();
+                        break;
+
+                    case "4":
+                        MainMenu();
                         break;
 
                 }
@@ -141,6 +190,7 @@ namespace Lab03_Guess_Word_Game
                 }
                 counter++;
                 guessArray[counter] = guess;
+  
             }
             Console.WriteLine($"{key}");
             Console.WriteLine($"Hooray! Your are in house {key}");
@@ -157,14 +207,10 @@ namespace Lab03_Guess_Word_Game
                     streamWriterG.WriteLine($"{houseArray[i]}");
                 }              
             }
-            using (StreamWriter streamWriterA = new StreamWriter(Guesses))
-            {
-
-            }
         }
         static string[] ReadFileWords(string Path)
         {
-            string[] words = File.ReadAllLines(Path);
+            string[] words = File.ReadAllLines(Answers);
             string[] answerKeyList = new string[words.Length];
 
             for (int i = 0; i < words.Length; i++)
@@ -174,11 +220,33 @@ namespace Lab03_Guess_Word_Game
             return answerKeyList;
         }
 
-        static void UpdateFileWords(string Path, string guess)
+        static string[] DisplayFileHouses(string Path)
         {
-            using (StreamWriter streamWriter = File.AppendText(Path))
+            string[] words = File.ReadAllLines(Answers);
+            string[] answerKeyList = new string[words.Length];
+
+            for (int i = 0; i < words.Length; i++)
             {
-                streamWriter.WriteLine($"{guess}");
+                answerKeyList[i] = words[i];
+            }
+            foreach(string house in words)
+            {
+                Console.WriteLine(house);
+            }
+            return answerKeyList;
+        }
+
+        static string AskForNewHouse ()
+        {
+            Console.WriteLine("What house would you like to add?");
+            string input = Console.ReadLine();
+            return input;
+        }
+        static void AddHouse(string input)
+        {
+            using (StreamWriter streamWriter = File.AppendText(Answers))
+            {
+                streamWriter.WriteLine($"{input}");
             }
         }
 
