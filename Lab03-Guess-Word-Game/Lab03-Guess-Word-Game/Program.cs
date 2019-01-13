@@ -123,12 +123,9 @@ namespace Lab03_Guess_Word_Game
 
         static void StartGame()
         {
+            Console.Clear();
             Console.WriteLine("What is your house?");
-            //string guess = GetGuess();
-            //UpdateFileWords(Guesses, guess);
-            //ReadFileWords(Answers);
-            string key = RandomHouse().ToLower();
-            RunGame(key);
+            RunGame(RandomHouse().ToUpper());
             Console.ReadLine();
             MainMenu();
         }
@@ -136,8 +133,16 @@ namespace Lab03_Guess_Word_Game
         static string GetGuess()
         {
             Console.WriteLine();
-            Console.WriteLine("Guess");
-            string guess = Console.ReadLine();
+            string guess;
+            try
+            {
+                Console.WriteLine("Guess");
+                guess = Console.ReadLine().ToUpper();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
             return guess;
         }
         public static string RandomHouse()
@@ -149,33 +154,26 @@ namespace Lab03_Guess_Word_Game
 
         }
 
-        //public static string[] GameDefault(string key)
-        //{
-        //    string wrong = "_";
-        //    string[] defaultArray = new string[key.Length];
-        //    for (int i = 0; i < key.Length; i++)
-        //    {
-        //        keyArray[i] = wrong;
-        //        Console.Write($"{keyArray[i]} ");
-        //    }
-        //    return keyArray;
-            
-        //}
-        public static void RunGame(string key)
+        public static string[] DefaultArray(string key)
         {
-            string wrong = "_";
-            
-            char[] charKeyArray;
-            charKeyArray = key.ToCharArray();
+            char[] charKeyArray = key.ToCharArray();
             string[] defaultArray = new string[charKeyArray.Length];
-            //string container = defaultArray.ToString();
-            string[] guessArray = new string[25];
-            int counter = 0;
             for (int i = 0; i < key.Length; i++)
             {
-                defaultArray[i] = wrong;
+                defaultArray[i] = "_";
             }
-            while (defaultArray.Contains(wrong))
+            return defaultArray;
+        }
+        public static void RunGame(string key)
+        {
+            
+            string wrong = "_";
+            char[] charKeyArray;
+            charKeyArray = key.ToCharArray();
+            string[] defaultArray = DefaultArray(key);
+            string[] guessArray = new string[25];
+            int counter = 0;
+            while (defaultArray.Contains(wrong) && counter < 24)
             {
 
                 Console.Write($"{String.Join(" ", defaultArray)}");
@@ -184,8 +182,8 @@ namespace Lab03_Guess_Word_Game
                 {
                     Console.WriteLine($"Previous guesses: {String.Join(" ", guessArray)}");
                 }
-                //string[] keyArray = new string[key.Length];
-                string guess = GetGuess().ToLower();
+
+                string guess = GetGuess();
                 for (int i = 0; i < charKeyArray.Length; i++)
                 {
                     
@@ -199,16 +197,43 @@ namespace Lab03_Guess_Word_Game
                 guessArray[counter] = guess;
   
             }
-            Console.WriteLine($"{key}");
-            Console.WriteLine($"Hooray! Your are in house {key}");
-            Console.ReadLine();
+            if(defaultArray.Contains(wrong))
+            {
+                Console.WriteLine($"Sorry but you've had one too many guesses. The house is {key}. Try again.");
+            }
+            else
+            {
+                Console.WriteLine($"{key}");
+                Console.WriteLine($"Hooray! Your are in house {key}");
+            }
+
+            try
+            {
+                Console.WriteLine("Play again? y/n");
+                string again = Console.ReadLine();
+                if (again == "y")
+                {
+                    StartGame();
+                }
+                else if (again == "n")
+                {
+                    DeleteFile(Answers);
+                    Environment.Exit(0);
+                }
+                Console.ReadLine();
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
         }
 
         static void CreateFile(string Path)
         {
             using (StreamWriter streamWriterG = new StreamWriter(Answers))
             {
-                string[] houseArray = { "Lannister", "Baratheon", "Greyjoy", "Stark", "Tyrell", "Bolton", "Targaryen" };
+                string[] houseArray = { "LANNISTER", "BARATHEON", "GREYJOY", "STARK", "TYRELL", "BOLTON", "TARGARYEN" };
                 for (int i = 0; i < houseArray.Length; i++)
                 {
                     streamWriterG.WriteLine($"{houseArray[i]}");
@@ -246,8 +271,17 @@ namespace Lab03_Guess_Word_Game
 
         static string AskForNewHouse ()
         {
-            Console.WriteLine("What house would you like to add?");
-            string input = Console.ReadLine();
+            string input;
+            try
+            {
+                Console.WriteLine("What house would you like to add?");
+                input = Console.ReadLine().ToUpper();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
             return input;
         }
         static void AddHouse(string input)
@@ -260,8 +294,17 @@ namespace Lab03_Guess_Word_Game
 
         static string AskForDeletion ()
         {
-            Console.WriteLine("What house would you like to remove?");
-            string input = Console.ReadLine();
+            string input;
+            try
+            {
+                Console.WriteLine("What house would you like to remove?");
+                input = Console.ReadLine().ToUpper();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
             return input;
         }
 

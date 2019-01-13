@@ -1,6 +1,7 @@
-Lannister
-Baratheon
-Greyjoy
-Stark
-Tyrell
-
+LANNISTER
+BARATHEON
+GREYJOY
+STARK
+TYRELL
+BOLTON
+TARGARYEN
