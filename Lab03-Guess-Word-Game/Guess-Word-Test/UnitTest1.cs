@@ -7,9 +7,11 @@ namespace Guess_Word_Test
     public class UnitTest1
     {
         [Fact]
-        public void Test1()
+        public void TestUpdate()
         {
-
+            string testHouse = "TESTHOUSE";
+            string[] expectedResult = { "LANNISTER", "BARATHEON", "GREYJOY", "STARK", "TYRELL", "BOLTON", "TARGARYEN", "TESTHOUSE" };
+            Assert.Equal(expectedResult, Program.AddHouse(testHouse));
         }
     }
 }

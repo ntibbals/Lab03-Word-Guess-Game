@@ -93,7 +93,6 @@ namespace Lab03_Guess_Word_Game
                     case "1":
                         DisplayFileHouses(Answers);
                         AddHouse(AskForNewHouse());
-                        DisplayFileHouses(Answers);
                         Console.ReadLine();
                         break;
 
@@ -136,7 +135,7 @@ namespace Lab03_Guess_Word_Game
         /// <summary>
         /// Initializes the game
         /// </summary>
-        static void StartGame()
+        public static void StartGame()
         {
             Console.Clear();
             Console.WriteLine("What is your house?");
@@ -149,7 +148,7 @@ namespace Lab03_Guess_Word_Game
         /// retrieves the guess from end user
         /// </summary>
         /// <returns>guess</returns>
-        static string GetGuess()
+        public static string GetGuess()
         {
             Console.WriteLine();
             string guess;
@@ -262,7 +261,7 @@ namespace Lab03_Guess_Word_Game
         /// Instantiates Initial File
         /// </summary>
         /// <param name="Path">file path</param>
-        static void CreateFile(string Path)
+        public static void CreateFile(string Path)
         {
             using (StreamWriter streamWriterG = new StreamWriter(Answers)) ///using statement ensures method ends after creation of file
             {
@@ -278,7 +277,7 @@ namespace Lab03_Guess_Word_Game
         /// </summary>
         /// <param name="Path">file path</param>
         /// <returns>an array of words from file</returns>
-        static string[] ReadFileWords(string Path)
+        public static string[] ReadFileWords(string Path)
         {
             string[] words = File.ReadAllLines(Answers); /// reads file based on path
             string[] answerKeyList = new string[words.Length];
@@ -295,7 +294,7 @@ namespace Lab03_Guess_Word_Game
         /// </summary>
         /// <param name="Path">file path</param>
         /// <returns>an array of words from file</returns>
-        static string[] DisplayFileHouses(string Path)
+        public static string[] DisplayFileHouses(string Path)
         {
             string[] words = File.ReadAllLines(Answers);
             string[] answerKeyList = new string[words.Length];
@@ -316,7 +315,7 @@ namespace Lab03_Guess_Word_Game
         /// Asks user for new house to add
         /// </summary>
         /// <returns>user input for addition</returns>
-        static string AskForNewHouse ()
+        public static string AskForNewHouse ()
         {
             string input;
             try
@@ -331,19 +330,27 @@ namespace Lab03_Guess_Word_Game
 
             return input;
         }
-        static void AddHouse(string input)
+        /// <summary>
+        /// Adds house taken from users into text file
+        /// </summary>
+        /// <param name="input">user input for new house</param>
+        /// <returns>updated array</returns>
+        public static string[] AddHouse(string input)
         {
             using (StreamWriter streamWriter = File.AppendText(Answers))
             {
                 streamWriter.WriteLine($"{input}");
             }
+            string[] newHouses = DisplayFileHouses(Answers);
+
+            return newHouses;
         }
 
         /// <summary>
         /// Asks user for input for deletion
         /// </summary>
         /// <returns>user input</returns>
-        static string AskForDeletion ()
+        public static string AskForDeletion ()
         {
             string input;
             try
@@ -365,7 +372,7 @@ namespace Lab03_Guess_Word_Game
         /// <param name="input">user input for deletion</param>
         /// <param name="Path">file path</param>
         /// <returns>updated array</returns>
-        static string[] DeleteHouse(string input, string Path)
+        public static string[] DeleteHouse(string input, string Path)
         {
             string[] words = File.ReadAllLines(Answers);
             string[] answerKeyList = new string[words.Length];
@@ -390,7 +397,7 @@ namespace Lab03_Guess_Word_Game
         /// </summary>
         /// <param name="newList">updated array list</param>
         /// <param name="Path">file path</param>
-        static void CreateUpdatedFile(string[] newList, string Path)
+       public static void CreateUpdatedFile(string[] newList, string Path)
         {
             DeleteFile(Answers);
             using (StreamWriter streamWriterG = new StreamWriter(Answers))
@@ -405,7 +412,7 @@ namespace Lab03_Guess_Word_Game
         /// Deletes file
         /// </summary>
         /// <param name="Path">file path</param>
-        static void DeleteFile(string Path)
+        public static void DeleteFile(string Path)
         {
             File.Delete(Answers);
         }
