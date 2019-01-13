@@ -6,7 +6,14 @@ namespace Lab03_Guess_Word_Game
 {
     public class Program
     {
+        /// <summary>
+        /// instantiating the file path
+        /// </summary>
         public static string Answers = "../../../../../GameWords.txt";
+        /// <summary>
+        /// Main method for continuous applicaiton
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             bool displayMenu = true;
@@ -20,7 +27,9 @@ namespace Lab03_Guess_Word_Game
                    
             }
         }
-
+        /// <summary>
+        /// Menu method to control initial display switch
+        /// </summary>
         public static void MainMenu()
         {
             Console.Clear();
@@ -65,6 +74,9 @@ namespace Lab03_Guess_Word_Game
             }
 
         }
+        /// <summary>
+        /// Administrative switch method
+        /// </summary>
         public static void Admin()
         {
             Console.Clear();
@@ -121,6 +133,9 @@ namespace Lab03_Guess_Word_Game
 
         }
 
+        /// <summary>
+        /// Initializes the game
+        /// </summary>
         static void StartGame()
         {
             Console.Clear();
@@ -130,6 +145,10 @@ namespace Lab03_Guess_Word_Game
             MainMenu();
         }
 
+        /// <summary>
+        /// retrieves the guess from end user
+        /// </summary>
+        /// <returns>guess</returns>
         static string GetGuess()
         {
             Console.WriteLine();
@@ -145,6 +164,10 @@ namespace Lab03_Guess_Word_Game
             }
             return guess;
         }
+        /// <summary>
+        /// Selects a random house from file created
+        /// </summary>
+        /// <returns>random house for the game</returns>
         public static string RandomHouse()
         {
             Random rand = new Random();
@@ -153,51 +176,58 @@ namespace Lab03_Guess_Word_Game
             return houseArray[chosenHouse];
 
         }
-
+        /// <summary>
+        /// Instantiates a the game default array to display
+        /// </summary>
+        /// <param name="key">random house string</param>
+        /// <returns>default array for game load</returns>
         public static string[] DefaultArray(string key)
         {
             char[] charKeyArray = key.ToCharArray();
-            string[] defaultArray = new string[charKeyArray.Length];
+            string[] defaultArray = new string[charKeyArray.Length]; ///instantiates a new array allocating enough memory based on the length of the key
             for (int i = 0; i < key.Length; i++)
             {
-                defaultArray[i] = "_";
+                defaultArray[i] = "_"; ///fills each position of array with character
             }
             return defaultArray;
         }
+        /// <summary>
+        /// Starts game logic
+        /// </summary>
+        /// <param name="key">random house key</param>
         public static void RunGame(string key)
         {
-            
             string wrong = "_";
             char[] charKeyArray;
             charKeyArray = key.ToCharArray();
-            string[] defaultArray = DefaultArray(key);
-            string[] guessArray = new string[25];
+            string[] defaultArray = DefaultArray(key); /// initializes new array and calls defaultarray method
+            string[] guessArray = new string[25]; ///set maximum amount of guess
             int counter = 0;
-            while (defaultArray.Contains(wrong) && counter < 24)
+            while (defaultArray.Contains(wrong) && counter < 24) ///sets while loop to end if user guesses word or runs out of guesses
             {
 
-                Console.Write($"{String.Join(" ", defaultArray)}");
+                Console.Write($"{String.Join(" ", defaultArray)}"); ///rewrites default array each time based on users guesses
                 Console.WriteLine();
-                if (counter > 0)
+                if (counter > 0) /// only displays previous guess array if greater than 0
                 {
                     Console.WriteLine($"Previous guesses: {String.Join(" ", guessArray)}");
                 }
 
-                string guess = GetGuess();
+                string guess = GetGuess(); /// retrieves guess each turn
                 for (int i = 0; i < charKeyArray.Length; i++)
                 {
                     
-                    if (key[i].ToString() == guess)
+                    if (key[i].ToString() == guess) /// looks for guesses equal to the key
                 {
-                    defaultArray[i] = charKeyArray[i].ToString();
+                    defaultArray[i] = charKeyArray[i].ToString(); /// if true, replaces each position of default array with each position of key array
                 }
 
                 }
                 counter++;
-                guessArray[counter] = guess;
+                guessArray[counter] = guess; /// set value for each guess in array - index based on counter position
   
             }
-            if(defaultArray.Contains(wrong))
+            if(defaultArray.Contains(wrong)) /// if user still has not guessed house - displays
             {
                 Console.WriteLine($"Sorry but you've had one too many guesses. The house is {key}. Try again.");
             }
@@ -228,10 +258,13 @@ namespace Lab03_Guess_Word_Game
             }
 
         }
-
+        /// <summary>
+        /// Instantiates Initial File
+        /// </summary>
+        /// <param name="Path">file path</param>
         static void CreateFile(string Path)
         {
-            using (StreamWriter streamWriterG = new StreamWriter(Answers))
+            using (StreamWriter streamWriterG = new StreamWriter(Answers)) ///using statement ensures method ends after creation of file
             {
                 string[] houseArray = { "LANNISTER", "BARATHEON", "GREYJOY", "STARK", "TYRELL", "BOLTON", "TARGARYEN" };
                 for (int i = 0; i < houseArray.Length; i++)
@@ -240,18 +273,28 @@ namespace Lab03_Guess_Word_Game
                 }              
             }
         }
+        /// <summary>
+        /// Reads File
+        /// </summary>
+        /// <param name="Path">file path</param>
+        /// <returns>an array of words from file</returns>
         static string[] ReadFileWords(string Path)
         {
-            string[] words = File.ReadAllLines(Answers);
+            string[] words = File.ReadAllLines(Answers); /// reads file based on path
             string[] answerKeyList = new string[words.Length];
 
+            ///for loop wich places words from file into new answer array for random method
             for (int i = 0; i < words.Length; i++)
             {
                 answerKeyList[i] = words[i];
             }
             return answerKeyList;
         }
-
+        /// <summary>
+        /// Displays current house array from file
+        /// </summary>
+        /// <param name="Path">file path</param>
+        /// <returns>an array of words from file</returns>
         static string[] DisplayFileHouses(string Path)
         {
             string[] words = File.ReadAllLines(Answers);
@@ -269,6 +312,10 @@ namespace Lab03_Guess_Word_Game
             return answerKeyList;
         }
 
+        /// <summary>
+        /// Asks user for new house to add
+        /// </summary>
+        /// <returns>user input for addition</returns>
         static string AskForNewHouse ()
         {
             string input;
@@ -292,6 +339,10 @@ namespace Lab03_Guess_Word_Game
             }
         }
 
+        /// <summary>
+        /// Asks user for input for deletion
+        /// </summary>
+        /// <returns>user input</returns>
         static string AskForDeletion ()
         {
             string input;
@@ -308,6 +359,12 @@ namespace Lab03_Guess_Word_Game
             return input;
         }
 
+        /// <summary>
+        /// Selects house to delete from file
+        /// </summary>
+        /// <param name="input">user input for deletion</param>
+        /// <param name="Path">file path</param>
+        /// <returns>updated array</returns>
         static string[] DeleteHouse(string input, string Path)
         {
             string[] words = File.ReadAllLines(Answers);
@@ -328,6 +385,11 @@ namespace Lab03_Guess_Word_Game
             return newKeyList;
         }
 
+        /// <summary>
+        /// Creates a new file passed on current array
+        /// </summary>
+        /// <param name="newList">updated array list</param>
+        /// <param name="Path">file path</param>
         static void CreateUpdatedFile(string[] newList, string Path)
         {
             DeleteFile(Answers);
@@ -339,6 +401,10 @@ namespace Lab03_Guess_Word_Game
                 }
             }
         }
+        /// <summary>
+        /// Deletes file
+        /// </summary>
+        /// <param name="Path">file path</param>
         static void DeleteFile(string Path)
         {
             File.Delete(Answers);
