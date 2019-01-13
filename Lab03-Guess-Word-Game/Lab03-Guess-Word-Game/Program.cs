@@ -215,8 +215,6 @@ namespace Lab03_Guess_Word_Game
         public static void RunGame(string key)
         {
             string wrong = "_";
-            //char[] charKeyArray;
-            //charKeyArray = key.ToCharArray();
             string[] defaultArray = DefaultArray(key); /// initializes new array and calls defaultarray method
             string[] guessArray = new string[25]; ///set maximum amount of guess
             int counter = 0;
@@ -233,15 +231,6 @@ namespace Lab03_Guess_Word_Game
                 string guess = GetGuess(); /// retrieves guess each turn
 
                 ValidateGuess(key, guess, defaultArray);
-                //for (int i = 0; i < charKeyArray.Length; i++)
-                //{
-                    
-                //    if (key[i].ToString() == guess) /// looks for guesses equal to the key
-                //{
-                //    defaultArray[i] = charKeyArray[i].ToString(); /// if true, replaces each position of default array with each position of key array
-                //}
-
-                //}
                 counter++;
                 guessArray[counter] = guess; /// set value for each guess in array - index based on counter position
   
