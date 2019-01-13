@@ -24,5 +24,15 @@ namespace Guess_Word_Test
             string[] expectedResult = { "LANNISTER", "BARATHEON", "GREYJOY", "STARK", "TYRELL", "BOLTON" };
             Assert.Equal(expectedResult, Program.DeleteHouse(testHouse, testAnswers));
         }
+
+        [Fact]
+        public void TestWordRetreival()
+        {
+            /// test that given a instantiated file, retrieval of words is possible
+            string testAnswers = "../../../../../GameWords.txt";
+            Program.CreateFile(testAnswers);
+            string[] expectedResult = { "LANNISTER", "BARATHEON", "GREYJOY", "STARK", "TYRELL", "BOLTON", "TARGARYEN" };
+            Assert.Equal(expectedResult, Program.ReadFileWords(testAnswers));
+        }
     }
 }
