@@ -36,7 +36,9 @@ namespace Lab03_Guess_Word_Game
             try
             {
                 Console.Clear();
-                Console.WriteLine("Welcome to the Word Guess Game!");
+                Graphic();
+                Console.WriteLine("Welcome to the Seven Kingdoms!");
+                Console.WriteLine("Do you want to see which house you belong to?");
                 Console.WriteLine("1) Start game");
                 Console.WriteLine("2) Admin");
                 Console.WriteLine("3) Exit");
@@ -132,6 +134,17 @@ namespace Lab03_Guess_Word_Game
 
         }
 
+        public static void Graphic()
+        {
+            Console.WriteLine("_____________________________________________________________________");
+            Console.WriteLine("_____________________________________________________________________");
+            Console.WriteLine("_____________________________________________________________________");
+            Console.WriteLine("_____________________________________________________________________");
+            Console.WriteLine("_____________________________________________________________________");
+            Console.WriteLine("_____________________________________________________________________");
+            Console.WriteLine("_____________________________________________________________________");
+            Console.WriteLine("_____________________________________________________________________");
+        }
         /// <summary>
         /// Initializes the game
         /// </summary>
