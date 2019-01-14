@@ -23,17 +23,18 @@
 - The end user lands on a menu screen where they can select to play, view admin page or exit. If they select play, game immediately begins. If they opt to view admin page they will have the option to add a word, delete a word, view all words or return to main menu. During game play, the user has 25 guesses. Upon either running out of guesses or successfully guessing the word, the end user then has the option to play again or exit.
 
 #Main Menu
-![SCREENSHOT]()
+![SCREENSHOT](https://github.com/ntibbals/Lab03-Word-Guess-Game/blob/master/admin.PNG)
 
 #Admin Menu
-![SCREENSHOT]()
+![SCREENSHOT](https://github.com/ntibbals/Lab03-Word-Guess-Game/blob/master/main.PNG)
 
 #Add a Word
-![SCREENSHOT]()
+![SCREENSHOT](https://github.com/ntibbals/Lab03-Word-Guess-Game/blob/master/add.PNG)
 
 #Delete a Word
-![SCREENSHOT]()
+![SCREENSHOT](https://github.com/ntibbals/Lab03-Word-Guess-Game/blob/master/delete.PNG)
 
 #Game Play
-![SCREENSHOT]()
+![SCREENSHOT](https://github.com/ntibbals/Lab03-Word-Guess-Game/blob/master/correct.PNG)
 
+![SCREENSHOT](https://github.com/ntibbals/Lab03-Word-Guess-Game/blob/master/wrong.PNG)
