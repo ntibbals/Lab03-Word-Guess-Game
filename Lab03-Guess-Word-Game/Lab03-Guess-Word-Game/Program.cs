@@ -398,7 +398,7 @@ namespace Lab03_Guess_Word_Game
         {
             string[] words = File.ReadAllLines(Answers);
             string[] answerKeyList = new string[words.Length];
-            string[] newKeyList = new string[answerKeyList.Length - 1];
+            string[] newKeyList = new string[answerKeyList.Length];
 
             for (int i = 0; i < words.Length; i++)
             {
