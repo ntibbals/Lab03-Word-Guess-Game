@@ -404,11 +404,14 @@ namespace Lab03_Guess_Word_Game
             {
                 answerKeyList[i] = words[i];
             }
+            int counter = 0;
             for (int i = 0; i < newKeyList.Length; i++)
             {
+                string word = answerKeyList[i];
                 if (input != answerKeyList[i])
                 {
-                    newKeyList[i] = answerKeyList[i];
+                    newKeyList[counter] = answerKeyList[i];
+                    counter++;
                 }
             }
             return newKeyList;
